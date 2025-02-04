@@ -36,7 +36,7 @@ const animationClass = computed(() => {
 </script>
 
 <template>
-  <div class="text-center text-5xl text-white mt-3">
+  <div class="text-center text-4xl md:text-5xl text-white mt-3">
     <h1 class="headline">
       Let's
       <span class="text-violet-300 font-semibold pencil-highlighter">
