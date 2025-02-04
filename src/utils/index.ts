@@ -2,7 +2,7 @@ export const colorMap = {
   gray: {
     solid: "bg-gray-900 hover:bg-gray-800 text-white",
     faded: "bg-gray-100 text-gray-900 hover:bg-gray-200",
-    bordered: "border border-gray-400 text-gray-900 hover:bg-gray-100",
+    bordered: "border border-gray-400 text-gray-400",
     light: "bg-gray-100 text-gray-900 hover:bg-gray-200",
     flat: "text-gray-900 hover:bg-gray-100",
     ghost: "text-gray-900 hover:bg-gray-100",
