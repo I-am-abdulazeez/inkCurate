@@ -173,6 +173,7 @@ const buttonClasses = computed(() => {
   const baseClasses = [
     "relative inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2",
     props.disabled || props.loading ? "opacity-50 cursor-not-allowed" : "",
+    props.to || props.href ? "cursor-pointer" : "",
   ];
 
   // Size
