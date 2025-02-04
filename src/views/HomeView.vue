@@ -4,7 +4,9 @@ import Button from "@/components/ui/Button.vue";
 </script>
 
 <template>
-  <main class="flex justify-center items-center h-[95vh] flex-col">
+  <main
+    class="flex justify-center items-center h-screen overflow-hidden flex-col"
+  >
     <div class="flex gap-3 flex-col px-3 md:px-0">
       <h3 class="text-white text-3xl md:text-5xl font-bold text-center">
         Type Your Thoughts,
@@ -18,7 +20,7 @@ import Button from "@/components/ui/Button.vue";
       </div>
     </div>
     <p
-      class="text-gray-300 text-[12px] font-light sm:text-lg text-center my-10 max-w-md sm:max-w-xl"
+      class="text-gray-300 text-[12px] font-light sm:text-lg text-center my-10 max-w-sm sm:max-w-xl"
     >
       <span class="text-violet-300">Ink Insights</span>
       is your personal book recommendation assistant, offering tailored

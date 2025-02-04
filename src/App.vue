@@ -1,13 +1,21 @@
 <script setup lang="ts">
-import { RouterView } from "vue-router";
+import { computed } from "vue";
+
+import { RouterView, useRoute } from "vue-router";
 import INavbar from "@/components/INavbar.vue";
-import IFooter from "@/components/IFooter.vue";
+// import IFooter from "@/components/IFooter.vue";
+
+const route = useRoute();
+const isHome = computed(() => route.path === "/");
 </script>
 
 <template>
   <INavbar />
-  <main>
-    <RouterView />
+  <main
+    :class="{ 'overflow-hidden': isHome, 'min-h-screen': !isHome }"
+    class="flex flex-col"
+  >
+    <RouterView class="flex-grow" />
   </main>
-  <IFooter />
+  <!-- <IFooter /> -->
 </template>
