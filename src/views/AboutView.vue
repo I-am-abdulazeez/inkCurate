@@ -1,7 +1,7 @@
 <template>
   <section class="flex flex-col justify-start px-4">
     <div class="container mx-auto my-16">
-      <h1 class="text-white text-3xl font-bold my-6 mt-20">
+      <h1 class="text-white text-3xl font-bold my-10 sm:my-16">
         About
         <span class="text-violet-300 pencil-highlighter">Ink Insights</span>
       </h1>
@@ -18,25 +18,26 @@
             waiting to be discovered, how do you choose the one that truly
             speaks to you? Ink Insights is an AI-powered book companion designed
             to make that decision effortless. Instead of searching for a
-            specific title, simply type your thoughts—a mood, a theme, or an
-            idea—and let our AI guide you to the perfect read.
+            specific title, simply type your thoughts, a mood, a theme, or an
+            idea, and let our AI guide you to the perfect read.
           </p>
           <p class="mt-4 leading-relaxed text-[14px] sm:text-lg">
             Whether you crave a gripping mystery, a heartwarming romance, or a
             thought-provoking journey, Ink Insights understands your preferences
             and finds books that match your emotions. No more endless scrolling
-            or second-guessing—just instant, personalized recommendations
+            or second-guessing, just instant, personalized recommendations
             tailored to your reading desires.
           </p>
           <p class="mt-4 leading-relaxed text-[14px] sm:text-lg">
-            Our goal is to help you connect with stories that matter. Books are
-            more than words on a page; they are experiences, emotions, and
-            entire worlds waiting to be explored. With Ink Insights, every book
-            recommendation is designed to resonate with you on a deeper level.
+            Books are more than words on a page; they are experiences, emotions,
+            and entire worlds waiting to be explored. With Ink Insights, every
+            book recommendation is designed to resonate with you on a deeper
+            level.
           </p>
 
           <p class="mt-4 leading-relaxed text-[14px] sm:text-lg">
-            Now, go <span class="text-violet-200">read! 📖✨</span>
+            Our goal is to help you connect with stories that matter. Now, go
+            <span class="text-violet-200">read! 📖✨</span>
           </p>
         </article>
       </div>
