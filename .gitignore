@@ -15,6 +15,7 @@ coverage
 *.local
 
 notes
+test.md
 
 /cypress/videos/
 /cypress/screenshots/
