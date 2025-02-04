@@ -6,6 +6,8 @@ import IFooter from "@/components/IFooter.vue";
 
 <template>
   <INavbar />
-  <RouterView />
+  <main>
+    <RouterView />
+  </main>
   <IFooter />
 </template>
