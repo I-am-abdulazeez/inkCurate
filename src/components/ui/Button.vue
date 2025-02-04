@@ -8,6 +8,7 @@
     :aria-disabled="disabled || loading"
     :aria-busy="loading"
     @click="handleClick"
+    @mousedown="createRipple"
   >
     <!-- Loading Spinner -->
     <span v-if="loading" class="mr-2">
@@ -55,7 +56,10 @@
       class="absolute inset-0 overflow-hidden rounded-[inherit]"
     >
       <span
-        class="ripple-circle absolute bg-white/30 rounded-full scale-0 opacity-100 animate-ripple"
+        v-for="(circle, index) in rippleCircles"
+        :key="index"
+        class="absolute bg-white/30 rounded-full transform -translate-x-1/2 -translate-y-1/2 animate-ripple"
+        :style="circle.style"
       ></span>
     </span>
   </component>
@@ -64,48 +68,59 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import type { Component, PropType } from "vue";
+import { colorMap } from "@/utils";
 
-// Rename the component to follow multi-word naming convention
+type Color = "gray" | "red" | "violet"; // Add more colors as needed
+type Variant =
+  | "solid"
+  | "faded"
+  | "bordered"
+  | "light"
+  | "flat"
+  | "ghost"
+  | "shadow";
+
 defineOptions({
   name: "BaseButton",
 });
 
+// Types
+type RippleCircle = {
+  style: {
+    left: string;
+    top: string;
+    width: string;
+    height: string;
+  };
+};
+
 const props = defineProps({
-  // Size
   size: {
     type: String as PropType<"sm" | "md" | "lg">,
     default: "md",
   },
-  // Radius
   radius: {
     type: String as PropType<
       "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "none" | "full"
     >,
     default: "md",
   },
-  // Color
   color: {
-    type: String,
-    default: "primary",
+    type: String as PropType<Color>,
+    default: "gray",
   },
-  // Variant
   variant: {
-    type: String as PropType<
-      "solid" | "faded" | "bordered" | "light" | "flat" | "ghost" | "shadow"
-    >,
+    type: String as PropType<Variant>,
     default: "solid",
   },
-  // Disabled
   disabled: {
     type: Boolean,
     default: false,
   },
-  // Loading
   loading: {
     type: Boolean,
     default: false,
   },
-  // Icons
   startIcon: {
     type: Object as PropType<Component>,
     default: null,
@@ -114,22 +129,18 @@ const props = defineProps({
     type: Object as PropType<Component>,
     default: null,
   },
-  // Icon Only
   iconOnly: {
     type: Boolean,
     default: false,
   },
-  // Ripple Effect
   ripple: {
     type: Boolean,
     default: true,
   },
-  // Router Link
   to: {
     type: [String, Object],
     default: null,
   },
-  // External Link
   href: {
     type: String,
     default: null,
@@ -137,138 +148,103 @@ const props = defineProps({
 });
 
 const emit = defineEmits(["click"]);
-
 const rippleElement = ref<HTMLElement | null>(null);
+const rippleCircles = ref<RippleCircle[]>([]);
 
-// Determine the tag (button, RouterLink, or anchor)
 const tag = computed(() => {
   if (props.to) return "RouterLink";
   if (props.href) return "a";
   return "button";
 });
 
-// Handle Click with Ripple Effect
-const handleClick = (event: MouseEvent) => {
-  if (props.ripple && rippleElement.value) {
-    const rippleCircle = rippleElement.value.querySelector(
-      ".ripple-circle"
-    ) as HTMLElement | null;
-    if (rippleCircle) {
-      const rect = rippleElement.value.getBoundingClientRect();
-      const size = Math.max(rect.width, rect.height);
+// Improved variant styles with proper default handling
+const getVariantClasses = computed(() => {
+  const defaultColor = "gray";
+  const defaultVariant = "solid";
 
-      // Use optional chaining and type assertion for style
-      rippleCircle.style.width = `${size}px`;
-      rippleCircle.style.height = `${size}px`;
-      rippleCircle.style.left = `${event.clientX - rect.left - size / 2}px`;
-      rippleCircle.style.top = `${event.clientY - rect.top - size / 2}px`;
-      rippleCircle.classList.add("animate-ripple");
-    }
-  }
-  emit("click", event);
-};
+  const color = props.color in colorMap ? props.color : defaultColor;
+  const variant =
+    props.variant in colorMap[color] ? props.variant : defaultVariant;
 
-// Dynamic Button Classes
+  return colorMap[color][variant];
+});
+
+// Improved button classes
 const buttonClasses = computed(() => {
   const baseClasses = [
-    "relative inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2",
+    "relative inline-flex items-center justify-center font-medium transition-all duration-200",
+    "focus:outline-none focus:ring-2 focus:ring-offset-2",
     props.disabled || props.loading ? "opacity-50 cursor-not-allowed" : "",
     props.to || props.href ? "cursor-pointer" : "",
+    getVariantClasses.value,
   ];
 
-  // Size
-  switch (props.size) {
-    case "sm":
-      baseClasses.push("px-3 py-1.5 text-sm");
-      break;
-    case "md":
-      baseClasses.push("px-4 py-2 text-base");
-      break;
-    case "lg":
-      baseClasses.push("px-6 py-3 text-lg");
-      break;
-  }
+  // Size classes
+  const sizeClasses = {
+    sm: "px-3 py-1.5 text-sm",
+    md: "px-4 py-2 text-base",
+    lg: "px-6 py-3 text-lg",
+  };
+  baseClasses.push(sizeClasses[props.size]);
 
-  // Radius
-  switch (props.radius) {
-    case "sm":
-      baseClasses.push("rounded-sm");
-      break;
-    case "md":
-      baseClasses.push("rounded-md");
-      break;
-    case "lg":
-      baseClasses.push("rounded-lg");
-      break;
-    case "none":
-      baseClasses.push("rounded-none");
-      break;
-    case "xl":
-      baseClasses.push("rounded-xl");
-      break;
-    case "2xl":
-      baseClasses.push("rounded-2xl");
-      break;
-    case "3xl":
-      baseClasses.push("rounded-3xl");
-      break;
-    case "full":
-      baseClasses.push("rounded-full");
-      break;
-  }
-
-  // Variant & Color
-  switch (props.variant) {
-    case "solid":
-      baseClasses.push(
-        `bg-${props.color}-500 text-white hover:bg-${props.color}-600`
-      );
-      break;
-    case "faded":
-      baseClasses.push(
-        `bg-${props.color}-100 text-${props.color}-800 hover:bg-${props.color}-200`
-      );
-      break;
-    case "bordered":
-      baseClasses.push(
-        `border border-${props.color}-500 text-${props.color}-500 hover:bg-${props.color}-50`
-      );
-      break;
-    case "light":
-      baseClasses.push(
-        `bg-${props.color}-50 text-${props.color}-500 hover:bg-${props.color}-100`
-      );
-      break;
-    case "flat":
-      baseClasses.push(
-        `bg-transparent text-${props.color}-500 hover:bg-${props.color}-50`
-      );
-      break;
-    case "ghost":
-      baseClasses.push(
-        `bg-transparent text-${props.color}-500 hover:bg-${props.color}-50`
-      );
-      break;
-    case "shadow":
-      baseClasses.push(
-        `bg-${props.color}-500 text-white shadow-lg hover:bg-${props.color}-600 hover:shadow-xl`
-      );
-      break;
-  }
+  // Radius classes
+  const radiusClasses = {
+    none: "rounded-none",
+    sm: "rounded-sm",
+    md: "rounded-md",
+    lg: "rounded-lg",
+    xl: "rounded-xl",
+    "2xl": "rounded-2xl",
+    "3xl": "rounded-3xl",
+    full: "rounded-full",
+  };
+  baseClasses.push(radiusClasses[props.radius]);
 
   return baseClasses.join(" ");
 });
+
+// Improved ripple effect
+const createRipple = (event: MouseEvent) => {
+  if (!props.ripple || !rippleElement.value || props.disabled) return;
+
+  const rect = rippleElement.value.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height) * 2;
+
+  const circle: RippleCircle = {
+    style: {
+      left: `${event.clientX - rect.left}px`,
+      top: `${event.clientY - rect.top}px`,
+      width: `${size}px`,
+      height: `${size}px`,
+    },
+  };
+
+  rippleCircles.value.push(circle);
+  setTimeout(() => {
+    rippleCircles.value.shift();
+  }, 600);
+};
+
+const handleClick = (event: MouseEvent) => {
+  if (!props.disabled) {
+    emit("click", event);
+  }
+};
 </script>
 
 <style>
-@keyframes ripple {
-  to {
-    transform: scale(4);
-    opacity: 0;
-  }
-}
-
 .animate-ripple {
   animation: ripple 0.6s linear;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
 }
 </style>
