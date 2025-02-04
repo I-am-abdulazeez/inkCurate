@@ -88,27 +88,4 @@ const animationClass = computed(() => {
   transform: translateY(0);
   opacity: 1;
 }
-
-/* Pencil highlighter underline for both static and animated words */
-.pencil-highlighter {
-  position: relative;
-  display: inline-block;
-}
-
-.pencil-highlighter::after {
-  content: "";
-  position: absolute;
-  bottom: -2px; /* Adjust for height */
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0) 0%,
-    #8b5cf6 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  background-size: 5px 2px;
-  background-repeat: repeat-x;
-}
 </style>
