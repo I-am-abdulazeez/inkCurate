@@ -15,9 +15,7 @@ const isActiveRoute = computed(() => (path: string) => {
 </script>
 
 <template>
-  <header
-    class="fixed top-0 left-0 right-0 z-50 bg-gray-950 backdrop-blur-sm podca"
-  >
+  <header class="fixed top-0 left-0 right-0 z-50 bg-gray-950 backdrop-blur-sm">
     <nav class="container mx-auto px-4 py-4">
       <div class="flex justify-between items-center">
         <RouterLink
