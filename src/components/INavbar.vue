@@ -25,7 +25,7 @@ const isActiveRoute = computed(() => (path: string) => {
           <img
             src="../assets/logo-ink.svg"
             alt="Ink Insights Logo"
-            class="w-8 h-8"
+            class="w-7 h-7 sm:w-8 sm:h-8"
           />
           <span class="text-white sm:text-lg font-semibold mt-2"
             >Ink Insights.</span

@@ -16,8 +16,8 @@ body {
 .podca {
   background-color: #e5e5f7;
   opacity: 0.8;
-  background-image: radial-gradient(#c4b4ff 0.5px, transparent 0.5px),
-    radial-gradient(#c4b4ff 0.5px, #030712 0.5px);
-  background-size: 20px 20px;
+  background-image: radial-gradient(#c4b4ff 0.3px, transparent 0.3px),
+    radial-gradient(#c4b4ff 0.5px, #030712 0.3px);
+  background-size: 15px 15px;
   background-position: 0 0, 10px 10px;
 }

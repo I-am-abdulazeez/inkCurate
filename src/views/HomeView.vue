@@ -18,7 +18,7 @@ import Button from "@/components/ui/Button.vue";
       </div>
     </div>
     <p
-      class="text-gray-300 text-[13px] font-light sm:text-lg text-center my-10 max-w-md sm:max-w-xl"
+      class="text-gray-300 text-[12px] font-light sm:text-lg text-center my-10 max-w-md sm:max-w-xl"
     >
       <span class="text-violet-300">Ink Insights</span>
       is your personal book recommendation assistant, offering tailored
