@@ -18,7 +18,7 @@
       @click="submitPreferences"
       :loading="isLoading"
     >
-      Get Your Next Read
+      What Should I Read?
     </Button>
 
     <BookList :loading="isLoading" :books="recBooks" :hasFetched="hasFetched" />
