@@ -33,7 +33,7 @@ const isActiveRoute = computed(() => (path: string) => {
         </RouterLink>
 
         <!-- Navigation Links -->
-        <div class="flex items-center gap-8">
+        <div class="flex items-center gap-6">
           <RouterLink
             v-for="link in navigationLinks"
             :key="link.path"
