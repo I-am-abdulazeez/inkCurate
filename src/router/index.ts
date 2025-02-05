@@ -15,9 +15,9 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue'),
     },
     {
-      path: '/insights',
-      name: 'insights',
-      component: () => import('../views/InsightsView.vue'),
+      path: '/explore',
+      name: 'explore',
+      component: () => import('../views/ExploreView.vue'),
     },
   ],
 })
