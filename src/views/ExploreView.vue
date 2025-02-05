@@ -65,7 +65,6 @@ const submitPreferences = async () => {
         toast.error(analysis.message);
       }
     } catch (error) {
-      console.error("Processing error:", error);
       toast.error(error);
     } finally {
       isLoading.value = false;
