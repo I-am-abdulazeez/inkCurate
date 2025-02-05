@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { useRoute } from "vue-router";
 import { computed } from "vue";
+import { useRoute } from "vue-router";
 
 const navigationLinks = [
   { name: "About", path: "/about" },
-  { name: "Insights", path: "/insights" },
+  { name: "Explore", path: "/explore" },
 ];
 
 const route = useRoute();
@@ -24,12 +24,12 @@ const isActiveRoute = computed(() => (path: string) => {
         >
           <img
             src="../assets/logo-ink.svg"
-            alt="Ink Insights Logo"
+            alt="InkCurate Logo"
             class="w-7 h-7 sm:w-8 sm:h-8"
           />
-          <span class="text-white sm:text-lg font-semibold mt-2"
-            >Ink Insights.</span
-          >
+          <span class="text-white sm:text-lg font-semibold mt-2">
+            InkCurate.
+          </span>
         </RouterLink>
 
         <!-- Navigation Links -->
