@@ -3,26 +3,30 @@ import './assets/main.css';
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
-import Vue3Toastify, { type ToastContainerOptions } from 'vue3-toastify';
-import 'vue3-toastify/dist/index.css';
+import { createNotivue } from 'notivue'
+
+import 'notivue/notification.css' // Only needed if using built-in notifications
+import 'notivue/animations.css' // Only needed if using built-in animations
+
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+
 
 import App from './App.vue'
 import router from './router'
 
 const app = createApp(App)
 
-app.use(createPinia())
-app.use(Vue3Toastify, {
-  autoClose: 3000,
-  position: 'bottom-center',
-  toastStyle: {
-    fontFamily: "Parkinsans, Inter, sans-serif",
-    borderRadius: "10px",
-    fontWeight: 500,
-    backgroundColor: "#1f2937",
-    color: "#f3f4f6",
-  },
-} as ToastContainerOptions,)
 app.use(router)
+
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
+app.use(pinia);
+app.use(createNotivue({
+  position: 'bottom-center',
+  notifications: {
+    error: { duration: 2500 },
+    success: { duration: 2500 }
+  }
+}))
 
 app.mount('#app')
