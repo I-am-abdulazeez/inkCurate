@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import Reads from "@/assets/reads.jpg";
+</script>
+
 <template>
   <section class="flex flex-col justify-start px-4">
     <div class="container mx-auto my-16">
@@ -8,7 +12,7 @@
 
       <div class="flex flex-col gap-10 sm:gap-20 sm:flex-row sm:items-center">
         <img
-          src="../assets/reads.jpg"
+          :src="Reads"
           alt="InkCurate Logo"
           class="w-full max-w-sm rounded-lg shadow-lg shadow-gray-700"
         />
