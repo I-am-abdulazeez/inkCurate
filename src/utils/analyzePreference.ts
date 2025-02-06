@@ -1,27 +1,33 @@
 import { genAI } from "@/utils";
 
 
-export const analyzePreferencesWithAI = async (input: string) => {
+export const analyzePreferences = async (input: string) => {
   try {
     const prompt = `
-    You are an AI designed to extract book details from user input for recommendation purposes.
+    You are a book search AI that creates optimized queries for Google Books API.
 
-    ### **Task:**
-    Extract **key details** from the following book request and return the response **strictly in valid JSON format**.
+    Input: "${input}"
 
-    ### **User Input:** "${input}"
-
-    ### **Expected JSON Output Format:**
+    Return focused JSON for book search:
     \`\`\`json
     {
-      "genre": "Mystery",
-      "themes": ["Strong female lead", "Psychological suspense"],
-      "character_traits": ["Intelligent", "Independent"],
-      "time_period": "Modern",
-      "other_details": ["Set in a small town", "Detective as main character"]
+      "genre": "", // Main category (e.g., "Fiction", "Technical", "Self-Help")
+      "themes": [], // 1-3 primary search terms
+      "character_traits": [], // Only if specifically mentioned
+      "time_period": "", // When relevant
+      "other_details": [] // Additional key search terms
     }
     \`\`\`
-    `;
+
+    Guidelines:
+    - Use common book categories and search terms
+    - Match input language
+    - For fiction: focus on genre and themes
+    - For technical: use technology name and "Programming"
+    - For non-fiction: use subject area and key topics
+    - Keep terms simple and searchable
+    `
+      ;
 
     const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
     const result = await model.generateContent([prompt]);
@@ -43,7 +49,7 @@ export const analyzePreferencesWithAI = async (input: string) => {
 
     return {
       success: true,
-      data: parsedData, // Now properly parsed JSON or raw text
+      data: parsedData,
     };
   } catch (error) {
     console.error("AI Analysis Error:", error);
