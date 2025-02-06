@@ -38,7 +38,7 @@ export const fetchBooks = async (preferences: Preference): Promise<Book[]> => {
       throw new Error("No valid search terms provided.");
     }
 
-    // Check if user enters the same input again
+    // Same input by user, recommend another 20 books
     if (searchTerms === lastSearchQuery) {
       startIndex += 10; // Move to the next page of results
     } else {
@@ -46,7 +46,7 @@ export const fetchBooks = async (preferences: Preference): Promise<Book[]> => {
       startIndex = 0; // Reset, if the query is different
     }
 
-    const url = `${GOOGLE_BOOKS_URL}?q=${encodeURIComponent(searchTerms)}&key=${apiKey}&maxResults=10&startIndex=${startIndex}`;
+    const url = `${GOOGLE_BOOKS_URL}?q=${encodeURIComponent(searchTerms)}&key=${apiKey}&maxResults=20&startIndex=${startIndex}`;
 
     const response = await axios.get<GoogleBooksAPIResponse>(url);
 
