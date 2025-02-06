@@ -56,6 +56,15 @@ const submitPreferences = async () => {
     console.log("Error: something went wrong");
   }
 };
+
+const clearSearch = () => {
+  hasFetched.value = false;
+
+  bookStore.userInput = "";
+  bookStore.recBooks = [];
+
+  push.info("Search cleared. Start fresh!");
+};
 </script>
 
 <template>
@@ -72,20 +81,30 @@ const submitPreferences = async () => {
       ></textarea>
 
       <p class="text-gray-400 text-sm">
-        Hint: Click on the button again to fetch more books
+        Want more recommendations? Click again to discover new books!
       </p>
     </div>
 
-    <Button
-      color="violet"
-      variant="solid"
-      radius="2xl"
-      class="cursor-pointer"
-      @click="submitPreferences"
-      :loading="isLoading"
-    >
-      {{ isLoading ? "Loading" : "What Should I Read?" }}
-    </Button>
+    <div class="flex items-center gap-3">
+      <Button
+        color="violet"
+        variant="solid"
+        radius="2xl"
+        class="cursor-pointer"
+        @click="submitPreferences"
+        :loading="isLoading"
+      >
+        {{ isLoading ? "Loading" : "What Should I Read?" }}
+      </Button>
+
+      <button
+        class="cursor-pointer text-gray-400 border-gray-400 border-1 py-2 px-3 rounded-2xl disabled:cursor-not-allowed disabled:text-gray-600 disabled:border-gray-700"
+        @click="clearSearch"
+        :disabled="bookStore.recBooks.length === 0"
+      >
+        Clear History
+      </button>
+    </div>
 
     <BookList
       :loading="isLoading"
