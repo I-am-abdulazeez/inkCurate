@@ -66,7 +66,7 @@ const goToBookDetails = (book: Book) => {
   </div>
 
   <!-- Show "No books found" only after fetching has been initiated -->
-  <p v-else-if="hasFetched" class="text-gray-400 text-center mt-6">
+  <p v-else-if="hasFetched" class="text-gray-400 mt-6">
     No books found. Try refining your preferences.
   </p>
 </template>
