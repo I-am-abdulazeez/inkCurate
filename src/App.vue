@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
+import { Notivue, Notification } from "notivue";
+
 import INavbar from "@/components/INavbar.vue";
 </script>
 
@@ -7,6 +9,8 @@ import INavbar from "@/components/INavbar.vue";
   <INavbar />
   <main class="flex flex-col">
     <RouterView class="flex-grow" />
+    <Notivue v-slot="item">
+      <Notification :item="item" />
+    </Notivue>
   </main>
-  <!-- <IFooter /> -->
 </template>
