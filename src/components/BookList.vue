@@ -1,11 +1,23 @@
 <script setup lang="ts">
 import type { Book } from "@/types";
+import { useRouter } from "vue-router";
+
+import bookPlaceholder from "@/assets/book.jpg";
+import { useBookStore } from "@/stores/bookStore";
 
 defineProps<{
   books: Book[];
   loading: boolean;
-  hasFetched: boolean; // Add this prop to track if fetching has been initiated
+  hasFetched: boolean;
 }>();
+
+const router = useRouter();
+const bookStore = useBookStore();
+
+const goToBookDetails = (book: Book) => {
+  bookStore.setSelectedBook(book);
+  router.push(`/explore/${encodeURIComponent(book.title)}`);
+};
 </script>
 
 <template>
@@ -27,30 +39,27 @@ defineProps<{
       <div
         v-for="book in books"
         :key="book.link"
-        class="bg-gray-900 p-4 rounded-xl flex space-x-4"
+        class="bg-gray-900 p-4 rounded-xl flex space-x-4 cursor-pointer"
+        @click="goToBookDetails(book)"
       >
         <img
-          :src="book.thumbnail || '/placeholder.png'"
+          :src="book.thumbnail || bookPlaceholder"
           :alt="book.title"
           class="w-24 h-32 object-cover rounded-lg flex-shrink-0"
         />
 
         <div class="flex flex-col justify-between">
           <div>
-            <h3 class="text-white text-lg font-semibold">{{ book.title }}</h3>
-            <p class="text-gray-400 text-sm">{{ book.authors.join(", ") }}</p>
+            <h3 class="text-white text-lg font-semibold line-clamp-1">
+              {{ book.title }}
+            </h3>
+            <p class="text-gray-400 text-sm line-clamp-1">
+              {{ book.authors.join(", ") }}
+            </p>
             <p class="text-gray-300 text-xs mt-2 line-clamp-3">
               {{ book.description }}
             </p>
           </div>
-
-          <a
-            :href="book.link"
-            target="_blank"
-            class="text-violet-400 text-sm mt-3 hover:underline"
-          >
-            View Book →
-          </a>
         </div>
       </div>
     </div>
