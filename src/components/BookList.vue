@@ -42,7 +42,7 @@ const goToBookDetails = (book: Book) => {
         <img
           :src="book.thumbnail || bookPlaceholder"
           :alt="book.title"
-          class="w-24 h-32 object-cover rounded-lg flex-shrink-0"
+          class="w-24 h-28 object-cover rounded-xl flex-shrink-0"
         />
         <div class="flex flex-col justify-between overflow-hidden">
           <div class="overflow-hidden">
