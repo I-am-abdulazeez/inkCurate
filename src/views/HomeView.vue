@@ -28,7 +28,7 @@ import Button from "@/components/ui/Button.vue";
     </p>
 
     <Button size="lg" color="violet" radius="2xl" to="/explore" variant="solid">
-      Get Started! 🚀
+      Get Started!
     </Button>
   </main>
 </template>
