@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { computed } from "vue";
+
 import { useRoute } from "vue-router";
+
+import TwitterXIcon from "./ui/TwitterXIcon.vue";
 
 const navigationLinks = [
   { name: "About", path: "/about" },
@@ -33,7 +36,7 @@ const isActiveRoute = computed(() => (path: string) => {
         </RouterLink>
 
         <!-- Navigation Links -->
-        <div class="flex items-center gap-6">
+        <div class="flex items-center gap-4">
           <RouterLink
             v-for="link in navigationLinks"
             :key="link.path"
@@ -45,6 +48,9 @@ const isActiveRoute = computed(() => (path: string) => {
           >
             {{ link.name }}
           </RouterLink>
+          <a href="https://x.com/dev_azeez" class="mt-1">
+            <TwitterXIcon />
+          </a>
         </div>
       </div>
     </nav>
