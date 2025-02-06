@@ -75,22 +75,23 @@ const clearSearch = () => {
     <div class="mb-4">
       <textarea
         v-model="bookStore.userInput"
-        class="w-full p-4 bg-gray-900 text-gray-300 rounded-xl resize-none focus:outline-none"
+        class="w-full text-sm placeholder:text-sm p-4 bg-gray-900 text-gray-300 rounded-xl resize-none focus:outline-none"
         rows="5"
         placeholder="Enter your thoughts (e.g., 'I want a mystery novel with strong female characters')"
       ></textarea>
 
       <p class="text-gray-400 text-sm">
-        Want more recommendations? Click again to discover new books!
+        💡 Want more recommendations? Click again to discover new books!
       </p>
     </div>
 
-    <div class="flex items-center gap-3">
+    <div class="flex items-center justify-between gap-3">
       <Button
         color="violet"
         variant="solid"
-        radius="2xl"
+        radius="xl"
         class="cursor-pointer"
+        size="sm"
         @click="submitPreferences"
         :loading="isLoading"
       >
@@ -98,7 +99,7 @@ const clearSearch = () => {
       </Button>
 
       <button
-        class="cursor-pointer text-gray-400 border-gray-400 border-1 py-2 px-3 rounded-2xl disabled:cursor-not-allowed disabled:text-gray-600 disabled:border-gray-700"
+        class="cursor-pointer text-gray-400 text-[10px] border-gray-400 border-1 py-2 px-3 rounded-xl disabled:cursor-not-allowed disabled:text-gray-600 disabled:border-gray-700"
         @click="clearSearch"
         :disabled="bookStore.recBooks.length === 0"
       >
