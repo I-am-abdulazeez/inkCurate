@@ -1,6 +1,6 @@
 import axios from "axios";
 import type { Book, GoogleBooksAPIResponse, Preference } from "@/types";
-import { toast } from "vue3-toastify";
+import { push } from "notivue";
 
 const GOOGLE_BOOKS_URL = "https://www.googleapis.com/books/v1/volumes";
 
@@ -18,9 +18,7 @@ export const fetchBooks = async (preferences: Preference): Promise<Book[]> => {
     }
 
     if (!preferences || Object.keys(preferences).length === 0) {
-      toast.error("Enter your preferences..", {
-        position: toast.POSITION.BOTTOM_CENTER,
-      });
+      push.error("Enter your preferences..");
       return [];
     }
 
@@ -66,6 +64,7 @@ export const fetchBooks = async (preferences: Preference): Promise<Book[]> => {
     }));
   } catch (error) {
     console.error("Error fetching books:", error);
+    push.error(`Error fetching books. Try again.`)
     return [];
   }
 };
