@@ -6,6 +6,22 @@
   --font-sans: "Parkinsans", "Inter", sans-serif;
 }
 
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-950;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a78bfa;
+  border-radius: 10px;
+}
+
 html,
 body {
   scroll-behavior: smooth;
