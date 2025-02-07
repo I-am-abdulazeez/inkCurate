@@ -75,7 +75,7 @@ const clearSearch = () => {
     <div class="mb-4">
       <textarea
         v-model="bookStore.userInput"
-        class="w-full text-base sm:text-base md:text-xl placeholder:text-sm p-4 bg-gray-900 text-gray-300 rounded-xl resize-none focus:outline-none"
+        class="w-full text-base sm:text-base md:text-lg placeholder:text-sm sm:placeholder:text-lg p-4 bg-gray-900 text-gray-300 rounded-xl resize-none focus:outline-none"
         rows="5"
         placeholder="Enter your thoughts (e.g., 'I want a mystery novel with strong female characters')"
       ></textarea>
