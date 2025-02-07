@@ -69,7 +69,7 @@ const clearSearch = () => {
 
 <template>
   <div class="container mx-auto max-w-3xl mt-[7rem] px-5 sm:px-0">
-    <h2 class="text-lg sm:text-xl text-white font-light mb-4">
+    <h2 class="text-base sm:text-xl text-white font-light mb-4">
       Describe Your Reading Preferences...
     </h2>
     <div class="mb-4">
@@ -80,7 +80,7 @@ const clearSearch = () => {
         placeholder="Enter your thoughts (e.g., 'I want a mystery novel with strong female characters')"
       ></textarea>
 
-      <p class="text-gray-400 text-sm">
+      <p class="text-gray-400 text-base sm:text-sm">
         💡 Want more recommendations? Click again to discover new books!
       </p>
     </div>
