@@ -69,18 +69,18 @@ const clearSearch = () => {
 
 <template>
   <div class="container mx-auto max-w-3xl mt-[7rem] px-5 sm:px-0">
-    <h2 class="text-base sm:text-xl text-white font-light mb-4">
+    <h2 class="text-base sm:text-base md:text-xl text-white font-light mb-4">
       Describe Your Reading Preferences...
     </h2>
     <div class="mb-4">
       <textarea
         v-model="bookStore.userInput"
-        class="w-full text-sm placeholder:text-sm p-4 bg-gray-900 text-gray-300 rounded-xl resize-none focus:outline-none"
+        class="w-full text-base sm:text-base md:text-xl placeholder:text-sm p-4 bg-gray-900 text-gray-300 rounded-xl resize-none focus:outline-none"
         rows="5"
         placeholder="Enter your thoughts (e.g., 'I want a mystery novel with strong female characters')"
       ></textarea>
 
-      <p class="text-gray-400 text-base sm:text-sm">
+      <p class="text-gray-400 text-base sm:text-[10px] md:text-sm">
         💡 Want more recommendations? Click again to discover new books!
       </p>
     </div>
