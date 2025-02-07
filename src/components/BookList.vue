@@ -21,7 +21,7 @@ const goToBookDetails = (book: Book) => {
 </script>
 
 <template>
-  <div v-if="loading" class="text-gray-400 mt-6">
+  <div v-if="loading" class="text-gray-400 mt-6 sm:text-sm">
     Fetching recommendations...
   </div>
 
