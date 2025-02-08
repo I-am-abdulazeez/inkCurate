@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
 
-// Props for customization
 const props = defineProps<{
   text: string[];
   effect: "fade" | "blur" | "slide";
@@ -11,14 +10,13 @@ const currentText = ref(props.text[0]);
 const index = ref(0);
 const isVisible = ref(true);
 
-// Function to switch text with animation
 const changeText = () => {
-  isVisible.value = false; // Start fade/blur/slide out effect
+  isVisible.value = false;
   setTimeout(() => {
     index.value = (index.value + 1) % props.text.length;
     currentText.value = props.text[index.value];
-    isVisible.value = true; // Start fade/blur/slide in effect
-  }, 500); // Adjust timing to match CSS transition
+    isVisible.value = true;
+  }, 500);
 };
 
 // Auto-change text every 3 seconds
@@ -61,7 +59,6 @@ const animationClass = computed(() => {
   transition: opacity 0.5s, filter 0.5s, transform 0.5s;
 }
 
-/* Fade Effect */
 .fade {
   opacity: 0;
 }
@@ -69,7 +66,6 @@ const animationClass = computed(() => {
   opacity: 1;
 }
 
-/* Blur Effect */
 .blur {
   filter: blur(10px);
   opacity: 0;
@@ -79,7 +75,6 @@ const animationClass = computed(() => {
   opacity: 1;
 }
 
-/* Slide Effect */
 .slide {
   transform: translateY(20px);
   opacity: 0;
